@@ -40,7 +40,6 @@ app.post('/wikipages', db.createWikipage);
 app.put('/wikipages/:id', db.updateWikipage);
 app.delete('/wikipages/:id', db.deleteWikipage);
 
-// spaces routes
-app.listen(port, () => {
-  console.log(`App running on port ${port}.`);
+app.listen(process.env.PORT || port, () => {
+  console.log(`App running on port ${process.env.PORT || port}.`);
 });
