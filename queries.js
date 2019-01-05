@@ -1,5 +1,10 @@
 const Pool = require('pg').Pool;
 
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true
+});
+
 // GET all spaces
 const getSpaces = (request, response) => {
   pool.query(

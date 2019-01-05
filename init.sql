@@ -8,7 +8,7 @@ CREATE TABLE wikipages (
 
 CREATE TABLE spaces (
   ID SERIAL PRIMARY KEY,
-  title VARCHAR(100)),
+  title VARCHAR(100),
   space_id int4 REFERENCES spaces ON DELETE CASCADE
 )
 
@@ -18,6 +18,9 @@ BEGIN
   NEW.updated_at = NOW();
   RETURN NEW;
 END;
+$$ 
+LANGUAGE plpgsql;
+
 
 CREATE TRIGGER set_timestamp
 BEFORE UPDATE ON wikipages
