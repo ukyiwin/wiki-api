@@ -3,14 +3,14 @@ CREATE TABLE wikipages (
   title VARCHAR(100),
   content json NOT NULL,
   created_at timestamp NOT NULL DEFAULT NOW(),
-  updated_at timestamp NOT NULL DEFAULT NOW()
+  updated_at timestamp NOT NULL DEFAULT NOW(),
+  space_id int4 REFERENCES spaces ON DELETE CASCADE
 );
 
 CREATE TABLE spaces (
   ID SERIAL PRIMARY KEY,
   title VARCHAR(100),
-  space_id int4 REFERENCES spaces ON DELETE CASCADE
-)
+);
 
 CREATE FUNCTION trigger_set_timestamp()
 RETURNS TRIGGER AS $$

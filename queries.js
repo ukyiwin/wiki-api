@@ -139,7 +139,10 @@ const getWikipageById = (request, response) => {
 const createWikipage = (request, response) => {
   const { title, content, space_id } = request.body;
   pool.query(
-    'INSERT INTO wikipages (title, content, space_id) VALUES ($1, $2, $3) RETURNING id',
+    `INSERT INTO wikipages 
+      (title, content, space_id) 
+    VALUES ($1, $2, $3) 
+    RETURNING id`,
     [title, content, space_id],
     (error, results) => {
       if (error) {
@@ -156,7 +159,9 @@ const updateWikipage = (request, response) => {
   const { title, content } = request.body;
 
   pool.query(
-    'UPDATE wikipages SET title = $1, content = $2 WHERE id = $3',
+    `UPDATE wikipages 
+    SET title = $1, content = $2 
+    WHERE id = $3`,
     [title, content, id],
     (error, results) => {
       if (error) {
@@ -171,7 +176,7 @@ const updateWikipage = (request, response) => {
 const deleteWikipage = (request, response) => {
   const id = parseInt(request.params.id);
 
-  pool.query('DELETE FROM wikipages WHERE id = $1', [id], (error, results) => {
+  pool.query(`DELETE FROM wikipages WHERE id = $1`, [id], (error, results) => {
     if (error) {
       throw error;
     }
